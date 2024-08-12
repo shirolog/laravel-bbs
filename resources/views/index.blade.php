@@ -50,7 +50,7 @@
                         ID: {{$thread->id}} <br>
                         投稿者: {{$thread->user->name}} <br>
                         件名: <a href="{{route('thread.show', ['thread' => $thread->id])}}">{{$thread->title}}</a>
-                        <br> 返信{{$thread->replies_count}}件
+                        <p> 返信{{$thread->replies_count}}件</p>
                     </div>
                     
                     <div class="card-body">

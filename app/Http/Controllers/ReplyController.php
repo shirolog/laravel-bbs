@@ -48,9 +48,8 @@ class ReplyController extends Controller
      * Display the specified resource.
      */
     public function show(Reply $reply)
-    {   
-        $reply->load('user');
-        return view('show', compact('reply'));
+    { 
+        //
     }
 
     /**
