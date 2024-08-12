@@ -51,6 +51,14 @@
                         投稿者: {{$thread->user->name}} <br>
                         件名: <a href="{{route('thread.show', ['thread' => $thread->id])}}">{{$thread->title}}</a>
                         <p> 返信{{$thread->replies_count}}件</p>
+                        @if(Auth::user()->id == $thread-> user_id)
+                            <form action="{{route('thread.destroy', $thread->id)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger" 
+                                onclick="return confirm('このコメントを削除しますか?');">削除</button>
+                            </form>
+                        @endif    
                     </div>
                     
                     <div class="card-body">

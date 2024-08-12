@@ -25,10 +25,13 @@ Auth::routes();
 Route::get('/index', [ThreadController::class, 'index'])
 ->name('index');
 
-Route::post('thread', [ThreadController::class, 'store'])
+Route::post('/index', [ThreadController::class, 'store'])
 ->name('thread.store');
 Route::get('show/{thread}', [ThreadController::class, 'show'])
 ->name('thread.show');
+
+Route::delete('/index/{thread}', [ThreadController::class, 'destroy'])
+->name('thread.destroy');
 
 
 Route::post('show/{thread}', [ReplyController::class, 'store'])

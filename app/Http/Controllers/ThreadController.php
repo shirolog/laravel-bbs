@@ -79,6 +79,8 @@ class ThreadController extends Controller
      */
     public function destroy(Thread $thread)
     {
-        //
+        $thread->delete();
+
+        return redirect()->route('index', compact('thread'));
     }
 }
