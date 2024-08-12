@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\ThreadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,8 +22,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/index', [HomeController::class, 'index'])
+Route::get('/index', [ThreadController::class, 'index'])
 ->name('index');
 
-Route::post('Thread', [HomeController::class, 'store'])
+Route::post('thread', [ThreadController::class, 'store'])
 ->name('thread.store');
+Route::get('show/{thread}', [ThreadController::class, 'show'])
+->name('thread.show');
+
+
+Route::post('show/{thread}', [ReplyController::class, 'store'])
+->name('reply.store');

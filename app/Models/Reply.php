@@ -15,4 +15,12 @@ class Reply extends Model
         'user_id',
         'content',
     ];
+
+    // userとのリレーション関係
+
+    public function user(){
+
+        return $this->belongsTo(User::class);
+    }
+
 }

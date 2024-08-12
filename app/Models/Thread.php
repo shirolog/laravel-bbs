@@ -15,4 +15,16 @@ class Thread extends Model
         'title',
         'content',
     ];
+
+    //userとのリレーション関係
+    public function user(){
+
+        return $this->belongsTo(User::class);
+    }
+
+    //repliesとのリレーション関係
+    public function replies(){
+
+        return $this->hasMany(Reply::class);
+    }
 }
