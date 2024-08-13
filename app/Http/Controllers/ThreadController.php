@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reply;
 use App\Models\Thread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,8 @@ class ThreadController extends Controller
     {   
         $threads = Thread::with('user')
         ->withCount('replies')
-        ->get();
+        ->latest()
+        ->paginate(5);
 
         return view('index', compact('threads'));
     }
@@ -55,7 +57,12 @@ class ThreadController extends Controller
     public function show(Thread $thread)
     {  
         $thread->load('replies', 'user');
-        return view('show', compact('thread'));
+
+        $replies = $thread->replies()
+        ->latest()
+        ->paginate(5);
+
+        return view('show', compact('thread', 'replies'));
     }
 
     /**
@@ -81,6 +88,7 @@ class ThreadController extends Controller
     {
         $thread->delete();
 
-        return redirect()->route('index', compact('thread'));
+        $page = request()->input('page');
+        return redirect()->route('index', compact('thread', 'page'));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reply;
+use App\Models\Thread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -71,8 +72,12 @@ class ReplyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Reply $reply)
+    public function destroy(Thread $thread, Reply $reply)
     {
-        //
+        $reply->delete();
+
+        $page = request()->input('page');
+
+        return redirect()->route('thread.show', ['thread' => $thread->id, 'page' => $page]);
     }
 }

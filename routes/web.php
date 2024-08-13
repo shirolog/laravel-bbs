@@ -22,17 +22,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/index', [ThreadController::class, 'index'])
+Route::get('/threads', [ThreadController::class, 'index'])
 ->name('index');
 
-Route::post('/index', [ThreadController::class, 'store'])
+Route::post('/threads', [ThreadController::class, 'store'])
 ->name('thread.store');
-Route::get('show/{thread}', [ThreadController::class, 'show'])
+Route::get('/threads/show/{thread}', [ThreadController::class, 'show'])
 ->name('thread.show');
 
-Route::delete('/index/{thread}', [ThreadController::class, 'destroy'])
+Route::delete('/threads/{thread}', [ThreadController::class, 'destroy'])
 ->name('thread.destroy');
 
 
-Route::post('show/{thread}', [ReplyController::class, 'store'])
+Route::post('/threads/show/{thread}', [ReplyController::class, 'store'])
 ->name('reply.store');
+Route::delete('/threads/show/{thread}/{reply}', [ReplyController::class, 'destroy'])
+->name('reply.destroy');

@@ -53,6 +53,7 @@
                         <p> 返信{{$thread->replies_count}}件</p>
                         @if(Auth::user()->id == $thread-> user_id)
                             <form action="{{route('thread.destroy', $thread->id)}}" method="post">
+                                <input type="hidden" name="page" value="{{request()->input('page')}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" 
@@ -66,6 +67,7 @@
                     </div>    
                 </div>
             @endforeach
+            {!! $threads->links('pagination::bootstrap-5') !!}
         </div>
     </div>
 </div>

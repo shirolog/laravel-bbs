@@ -48,16 +48,26 @@
                     </div>    
                 </div>
 
-                @foreach($thread->replies as $reply)
+                @foreach($replies as $reply)
                     <div class="card mt-3">
-                        <div class="card-header">
+                        <div class="card-header" style="display:flex; align-items:center; gap:10px;">
                             投稿者: {{$reply->user->name}}
+                            @if(Auth::user()->id == $reply->user_id)
+                                <form action="{{route('reply.destroy', ['thread' => $thread->id, 'reply' => $reply->id])}}" method="post">
+                                    <input type="hidden" name="page" value="{{request()->input('page')}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" 
+                                    onclick="return confirm('このコメントを削除しますか？');">削除</button>
+                                </form>
+                            @endif
                         </div>
                         <div class="card-body">
                             {!! nl2br(e($reply->content)) !!}
                         </div>    
                     </div>
                 @endforeach
+                {!! $replies->links('pagination::bootstrap-5') !!}
         </div>
     </div>
 </div>

@@ -19,12 +19,33 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <style>
+        .text-muted{
+            display: none;
+        }
+        .justify-content-between div:nth-child(2){
+             width: 100%;
+             margin-top: 10px;
+        }
+        .pagination{
+            justify-content: center;
+        }
+
+        .page-item{
+            padding: 1.5px;
+        }
+
+        .page-link:not(first-child),
+        .page-link:not(last-child){
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/index') }}">
+                <a class="navbar-brand" href="{{ url('/threads') }}">
                     Laravel BBS
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
